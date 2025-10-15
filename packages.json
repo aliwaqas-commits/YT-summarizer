@@ -1,5 +1,23 @@
 {
-  "version": 2,
-  "public": true,
-  "name": "youtube-transcript-summarizer"
+  "name": "free-youtube-summarizer",
+  "version": "1.0.0",
+  "description": "100% Free YouTube Transcript Summarizer - AI Video Summary Tool",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "vite preview"
+  },
+  "keywords": [
+    "youtube transcript summarizer",
+    "summarize youtube video without transcript",
+    "youtube summarizer chrome extension",
+    "youtube transcript summarizer free",
+    "youtube summarizer without transcript",
+    "youtube video transcript summarizer",
+    "summarize youtube transcript ai",
+    "youtube transcript summarizer ai"
+  ],
+  "author": "AI Tools Team",
+  "license": "MIT"
 }

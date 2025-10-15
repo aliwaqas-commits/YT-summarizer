@@ -3,77 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <title>YouTube Transcript Summarizer | Free AI Video Summary Tool & Chrome Extension</title>
-  <meta name="description" content="100% free YouTube transcript summarizer. Instantly get summaries of YouTube video transcripts or videos without transcripts with no signup or payment. Chrome extension and web app!">
+  <meta name="description" content="100% free YouTube transcript summarizer. Instantly get summaries of any YouTube video—even videos without transcripts. No signup, no payment, Chrome extension available.">
   <meta name="keywords" content="youtube transcript summarizer, youtube transcript summarizer free, summarize youtube video ai, youtube summarizer without transcript, youtube summarizer chrome extension">
-  <meta itemprop="image" content="logo.png">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <!-- EEAT/SEO schema -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebSite",
-    "name":"YouTube Transcript Summarizer",
-    "url":"https://ytsummarizer.com",
-    "description":"100% free AI tool to summarize YouTube video transcripts or videos without transcript. Chrome extension.",
-    "creator":{
-      "@type":"Person",
-      "name":"Digital Marketing Expert",
-      "url":"https://www.linkedin.com/in/example"
-    }
-  }
-  </script>
   <link rel="stylesheet" href="tool.css">
 </head>
 <body>
   <div class="container">
-    <img src="logo.png" alt="YouTube Transcript Summarizer" style="width:60px;margin-bottom:20px;"/>
-    <h1>YouTube Transcript Summarizer <span style="font-size:0.65em; color:#f97316;">100% Free</span></h1>
+    <h1>YouTube Transcript Summarizer <span style="font-size:0.7em; color:#f97316;">100% Free</span></h1>
     <p>
-      Instantly summarize any YouTube video—even if it has no transcript. <b>Paste a YouTube link below, get a clean AI summary for free.</b>
+      Instantly summarize any YouTube video—even if it has no transcript. <b>Paste a YouTube link below, get a clean AI summary for free, no signup or payment required.</b>
     </p>
-    <!-- Summarizer Tool -->
-    <form id="summarizerForm" autocomplete="off" style="margin-bottom: 0;">
+    <!-- TOOL -->
+    <form id="summarizerForm" autocomplete="off">
       <input type="url" id="yturl" placeholder="Paste your YouTube link here..." required>
       <button type="submit" class="cta" style="margin-top:8px;">Summarize Video</button>
     </form>
     <div id="output" class="result" style="display:none;"></div>
-    <section class="features" style="margin:30px 0;">
-      <h2>Why Use This Summarizer?</h2>
+    <!-- FEATURES -->
+    <section style="margin:30px 0;">
+      <h2>Key Features</h2>
       <ul>
-        <li><b>100% Free Forever</b> – no sign-up, unlimited use</li>
-        <li>Summarize <b>with or without transcript</b></li>
-        <li>AI-powered: works for interviews, lectures, podcasts</li>
-        <li>Includes Chrome extension for one-click summaries</li>
-        <li>Mobile-friendly & privacy-first</li>
+        <li>100% Free Forever – unlimited use</li>
+        <li>Works with or without video transcript</li>
+        <li>AI-powered summaries for interviews, lectures, podcasts</li>
+        <li>Chrome extension for one-click YouTube summaries</li>
+        <li>Mobile-friendly, privacy-first</li>
       </ul>
     </section>
-    <section id="faq-section" style="margin-bottom:30px;">
+    <!-- FAQ -->
+    <section style="margin:22px 0;">
       <h2>FAQs</h2>
       <ul>
         <li><b>Is it really free?</b> Yes! No payment, no usage limits, no account needed.</li>
-        <li><b>Can it summarize videos without transcripts?</b> Yes – our AI understands audio and creates a summary even without a transcript.</li>
-        <li><b>Do you keep my links or summaries?</b> No. Summaries are processed only for your session—privacy is our priority.</li>
-        <li><b>How does the Chrome extension work?</b> With one click, summarize any public YouTube video directly on YouTube.com.</li>
-        <li><b>I have feedback or want to contribute.</b> Email us: <a href="mailto:support@ytsummarizer.com">support@ytsummarizer.com</a></li>
+        <li><b>Can it summarize videos without transcripts?</b> Yes – our AI works for videos without transcripts too.</li>
+        <li><b>Do you keep my links or summaries?</b> No. Privacy is our default—your data isn't stored.</li>
+        <li><b>How does the Chrome extension work?</b> Instantly summarize videos right from YouTube.com with one click.</li>
+        <li><b>Feedback or support?</b> Email: <a href="mailto:support@ytsummarizer.com">support@ytsummarizer.com</a></li>
       </ul>
     </section>
-    <section id="about-contact" style="margin-bottom:28px;">
+    <!-- ABOUT & CONTACT -->
+    <section style="margin-bottom:24px;">
       <h2>About & Contact</h2>
       <p>
-        <b>YouTube Transcript Summarizer</b> was built by real digital marketers and AI fans to save your time on YouTube. Free, open, and made for everyone.  
-        <br>Contact: <a href="mailto:support@ytsummarizer.com">support@ytsummarizer.com</a>
-        <br>Connect: <a href="https://www.linkedin.com/in/example">LinkedIn</a>
+        <b>YouTube Transcript Summarizer</b> is made by digital marketers and AI fans for creators, learners and professionals.  
+        <br>Questions or partnership ideas? <a href="mailto:support@ytsummarizer.com">support@ytsummarizer.com</a>
       </p>
     </section>
-    <section class="seo-keywords" style="font-size:1rem;color:#567;">
-      <b>Popular searches:</b> youtube transcript summarizer free, summarize youtube video without transcript, youtube summarizer ai, chrome extension, github
-    </section>
-    <footer class="footer" style="border-top:1.5px solid #eee; margin-top:38px; padding-top:14px;">
+    <!-- SEO Keywords (for Google and trust) -->
+    <div style="font-size:0.98rem;color:#567;">
+      <b>Popular searches:</b> youtube transcript summarizer free, youtube summarizer chrome extension, summarize youtube video without transcript, youtube summarizer AI
+    </div>
+    <!-- Footer -->
+    <footer class="footer" style="border-top:1.5px solid #eee; margin-top:34px; padding-top:12px;">
       &copy; 2025 ytsummarizer.com · Made with ❤️ · No login or payment needed
     </footer>
   </div>
   <script>
-    // Demo: Replace this with API logic for production
+    // Demo frontend only (replace with API logic in production)
     document.getElementById('summarizerForm').addEventListener('submit', function(e){
       e.preventDefault();
       var url = document.getElementById('yturl').value.trim();
@@ -84,7 +71,7 @@
         return;
       }
       output.style.display = 'block';
-      output.innerHTML = "<b>Summary for:</b> " + url + "<br><ul><li>This is a demo summary. In production, an AI backend would generate a summary based on the actual video.</li><li>AI can summarize even if there is no official transcript!</li></ul>";
+      output.innerHTML = "<b>Summary for:</b> " + url + "<br><ul><li>This is a demo summary. In a live version, the summary would be created by an AI backend using your video link.</li><li>Works even if there is no official transcript!</li></ul>";
     });
   </script>
 </body>

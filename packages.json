@@ -1,0 +1,9 @@
+  "name": "tooldeck",
+  "version": "1.0.0",
+  "private": true,
+  "description": "One page free toolkit. Ad supported. No build step.",
+  "scripts": {
+    "start": "npx serve -s -l 5173 .",
+    "dev": "npx http-server -p 5173 ."
+  }
+}

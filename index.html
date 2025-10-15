@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ToolDeck — Free Online Tools That Just Work</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A blazing-fast one page toolkit with free everyday utilities. No signups. No paywalls. Just useful." />
+  <meta name="theme-color" content="#111111" />
+  <meta name="robots" content="index, follow" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="ToolDeck — Free Online Tools That Just Work" />
+  <meta property="og:description" content="A blazing-fast one page toolkit with free everyday utilities. No signups. No paywalls. Just useful." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-domain.com/" />
+  <meta property="og:image" content="https://your-domain.com/og.png" />
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ToolDeck",
+    "url": "https://your-domain.com/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0" }
+  }
+  </script>
+  <!-- Minimal reset -->
+  <style>
+    :root {
+      --bg: #0b0b0c;
+      --card: #131316;
+      --muted: #9aa0aa;
+      --text: #f4f6f8;
+      --acc: #6ee7ff;
+      --acc2:#8b5cf6;
+      --ring: rgba(110,231,255,.35);
+    }
+    * { box-sizing: border-box; }
+    html,body { margin:0; padding:0; background:var(--bg); color:var(--text); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+    a { color: var(--acc); text-decoration: none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    header {
+      border-bottom: 1px solid #1c1c22;
+      background:
+        radial-gradient(1200px 600px at 80% -20%, rgba(139,92,246,.15), transparent 60%),
+        radial-gradient(900px 500px at 20% -10%, rgba(110,231,255,.14), transparent 55%);
+    }
+    .brand { display:flex; align-items:center; gap:10px; }
+    .brand .logo {
+      width:36px; height:36px; border-radius:10px;
+      background: linear-gradient(135deg, var(--acc), var(--acc2)); box-shadow: 0 0 0 6px rgba(139,92,246,.08);
+    }
+    .hero { padding: 36px 0 18px; }
+    h1 { font-size: clamp(28px, 4vw, 44px); margin: 6px 0 10px; letter-spacing: -0.5px; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .searchwrap { margin: 18px 0 10px; display:flex; gap:10px; flex-wrap:wrap; }
+    .input, textarea, select {
+      background: #0f0f13; color: var(--text); border:1px solid #1f2030;
+      border-radius: 12px; padding: 10px 12px; outline: none; width: 100%;
+    }
+    .input:focus, textarea:focus, select:focus { border-color: var(--acc); box-shadow: 0 0 0 4px var(--ring); }
+    .btn {
+      background: linear-gradient(180deg, #1b1c24, #12131a);
+      color: #e8f3ff; border:1px solid #2a2b3a;
+      border-radius: 12px; padding: 10px 14px; cursor: pointer;
+      transition: transform .08s ease, box-shadow .2s ease, border-color .2s;
+    }
+    .btn:hover { transform: translateY(-1px); border-color:#394057; }
+    .grid {
+      display:grid; gap:14px; grid-template-columns: repeat(12, 1fr); margin-top: 18px;
+    }
+    .card {
+      grid-column: span 12;
+      background: linear-gradient(180deg, #121218, #0f0f13);
+      border: 1px solid #1f2030; border-radius: 16px; padding: 16px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.015), 0 10px 25px rgba(0,0,0,.35);
+    }
+    @media (min-width: 720px) { .card.half { grid-column: span 6; } .card.third { grid-column: span 4; } }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .muted { color: var(--muted); font-size: 14px; margin-top: 6px; }
+    .row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .stack { display:flex; flex-direction:column; gap:8px; }
+    .out { background:#0d0d11; border:1px dashed #2a2b3a; padding:10px; border-radius:12px; min-height:44px; overflow:auto; }
+    .kpis { display:flex; gap: 14px; flex-wrap:wrap; margin-top: 16px; }
+    .kpi { background:#0f0f13; border:1px solid #1f2030; padding:10px 12px; border-radius:12px; color:#b9c0cc; font-size:13px; }
+    footer { border-top:1px solid #1c1c22; padding: 22px 0; margin-top: 28px; color: #9aa0aa; font-size: 14px; }
+    .ad { background:#0f0f13; border:1px dashed #2a2b3a; border-radius: 14px; padding: 12px; text-align:center; color:#99a2b3; }
+    .badge { display:inline-flex; align-items:center; gap:8px; background:#101420; border:1px solid #243047; padding:8px 10px; border-radius:999px; font-size:13px; color:#b8c7df; }
+    .hidden { display:none; }
+    .copy { font-size:13px; color:#a8b1c1; }
+    .tool-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .pill { background:#0e1320; border:1px solid #23304a; color:#c7d6ee; padding:6px 10px; border-radius:999px; font-size:12px; }
+    .sep { height:1px; background:#1c1c22; margin:10px 0; }
+  </style>
+  <!-- Libraries via CDN kept tiny and local-execution only -->
+  <script defer src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="row" style="justify-content:space-between">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <strong>ToolDeck</strong>
+        </div>
+        <nav class="row" role="navigation" aria-label="utility">
+          <span class="badge">Free forever - ad supported</span>
+        </nav>
+      </div>
+      <div class="hero">
+        <h1>Free online tools that slap</h1>
+        <p class="sub">Fast. Simple. No signups. Pick a tool and get sh*t done. Everything runs in your browser which keeps it private and snappy.</p>
+        <div class="kpis">
+          <span class="kpi">No paywalls</span>
+          <span class="kpi">One page</span>
+          <span class="kpi">SEO friendly</span>
+          <span class="kpi">Mobile ready</span>
+        </div>
+      </div>
+      <div class="ad" id="top-ad">
+        <!-- Ad placeholder. Replace with your AdSense code. -->
+        <strong>Ad</strong>
+        <div class="muted">Add your ad script here once approved</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Tool Cards -->
+    <section class="grid" id="tools">
+
+      <!-- PDF to Text -->
+      <article class="card half" id="pdf2text">
+        <h3>PDF to Text</h3>
+        <div class="muted">Extract text client side. No uploads to servers.</div>
+        <div class="sep"></div>
+        <div class="stack">
+          <input class="input" type="file" id="pdfFile" accept="application/pdf" />
+          <div class="row">
+            <input class="input" style="flex:1" type="number" id="pdfPages" min="1" placeholder="Max pages to parse - default 10" />
+            <button class="btn" id="parsePdfBtn">Extract</button>
+            <button class="btn" id="copyPdfTxt">Copy</button>
+            <button class="btn" id="downloadPdfTxt">Download .txt</button>
+          </div>
+          <div class="out" id="pdfOut" aria-live="polite"></div>
+        </div>
+      </article>
+
+      <!-- Image to WebP -->
+      <article class="card half" id="img2webp">
+        <h3>Image to WebP</h3>
+        <div class="muted">Compress images without pain. Works offline after load.</div>
+        <div class="sep"></div>
+        <div class="stack">
+          <input class="input" type="file" id="imgFile" accept="image/*" />
+          <div class="row">
+            <label>Quality</label>
+            <input class="input" type="range" id="webpQ" min="0.1" max="1" step="0.05" value="0.8" />
+            <button class="btn" id="convWebpBtn">Convert</button>
+          </div>
+          <div class="out" id="webpOut"></div>
+        </div>
+      </article>
+
+      <!-- YouTube Thumbnail Downloader -->
+      <article class="card half" id="ytthumb">
+        <h3>YouTube Thumbnail Downloader</h3>
+        <div class="muted">Paste a YouTube URL and grab its thumbnail instantly.</div>
+        <div class="sep"></div>
+        <div class="row">
+          <input class="input" id="ytUrl" placeholder="https://www.youtube.com/watch?v=VIDEOID" />
+          <button class="btn" id="ytBtn">Get</button>
+        </div>
+        <div class="stack" id="ytOut" style="margin-top:8px"></div>
+      </article>
+
+      <!-- QR Code Generator -->
+      <article class="card half" id="qr">
+        <h3>QR Code Generator</h3>
+        <div class="muted">Create a QR for a URL or any text.</div>
+        <div class="sep"></div>
+        <div class="row">
+          <input class="input" id="qrText" placeholder="Enter URL or text" />
+          <button class="btn" id="qrBtn">Generate</button>
+          <button class="btn" id="qrSave">Download PNG</button>
+        </div>
+        <div id="qrBox" class="stack" style="align-items:flex-start; margin-top:8px"></div>
+      </article>
+
+      <!-- Text Utilities -->
+      <article class="card half" id="textutils">
+        <h3>Text Utilities</h3>
+        <div class="muted">Uppercase, lowercase, title case, word count.</div>
+        <div class="sep"></div>
+        <div class="stack">
+          <textarea class="input" id="txtArea" rows="6" placeholder="Paste your text"></textarea>
+          <div class="tool-actions">
+            <button class="btn" data-act="upper">UPPER</button>
+            <button class="btn" data-act="lower">lower</button>
+            <button class="btn" data-act="title">Title Case</button>
+            <button class="btn" data-act="words">Word Count</button>
+            <button class="btn" id="copyTxtUtil">Copy</button>
+          </div>
+          <div class="out" id="txtOut"></div>
+        </div>
+      </article>
+
+      <!-- JSON Formatter -->
+      <article class="card half" id="jsonfmt">
+        <h3>JSON Formatter</h3>
+        <div class="muted">Validate and pretty print JSON.</div>
+        <div class="sep"></div>
+        <div class="stack">
+          <textarea class="input" id="jsonIn" rows="6" placeholder='{"foo":"bar"}'></textarea>
+          <div class="row">
+            <button class="btn" id="fmtBtn">Format</button>
+            <button class="btn" id="minBtn">Minify</button>
+            <button class="btn" id="copyJson">Copy</button>
+          </div>
+          <div class="out" id="jsonOut"></div>
+        </div>
+      </article>
+
+      <!-- URL UTM Builder -->
+      <article class="card half" id="utm">
+        <h3>URL UTM Builder</h3>
+        <div class="muted">Craft clean campaign URLs without screwing up parameters.</div>
+        <div class="sep"></div>
+        <div class="stack">
+          <input class="input" id="utmBase" placeholder="Base URL e.g. https://site.com/page" />
+          <div class="row">
+            <input class="input" id="utmSource" placeholder="utm_source" />
+            <input class="input" id="utmMedium" placeholder="utm_medium" />
+            <input class="input" id="utmCampaign" placeholder="utm_campaign" />
+          </div>
+          <div class="row">
+            <input class="input" id="utmTerm" placeholder="utm_term (optional)" />
+            <input class="input" id="utmContent" placeholder="utm_content (optional)" />
+          </div>
+          <div class="row">
+            <button class="btn" id="utmBuild">Build URL</button>
+            <button class="btn" id="utmCopy">Copy</button>
+          </div>
+          <div class="out" id="utmOut"></div>
+        </div>
+      </article>
+
+      <!-- URL Encoder Decoder -->
+      <article class="card half" id="urlcode">
+        <h3>URL Encoder - Decoder</h3>
+        <div class="muted">Quickly encode or decode URLs.</div>
+        <div class="sep"></div>
+        <div class="stack">
+          <textarea class="input" id="urlText" rows="4" placeholder="Paste URL or text"></textarea>
+          <div class="row">
+            <button class="btn" id="encBtn">Encode</button>
+            <button class="btn" id="decBtn">Decode</button>
+            <button class="btn" id="copyUrl">Copy</button>
+          </div>
+          <div class="out" id="urlOut"></div>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="grid" aria-label="ads">
+      <article class="card">
+        <div class="ad" id="mid-ad">
+          <!-- Ad placeholder two -->
+          <strong>Ad</strong>
+          <div class="muted">This is another ad slot. Keep it light for CLS.</div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div class="row" style="justify-content:space-between; align-items:center;">
+      <span class="copy">© <span id="yr"></span> ToolDeck. Free tools that just work.</span>
+      <div class="row" style="gap:10px">
+        <a href="#" class="pill">Privacy</a>
+        <a href="#" class="pill">Contact</a>
+        <a href="#" class="pill">Suggest a tool</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Helpers
+    const copyToClipboard = async (txt) => {
+      try { await navigator.clipboard.writeText(txt); alert('Copied'); } catch(e) { console.error(e); }
+    };
+    const downloadText = (name, content) => {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([content], {type:'text/plain'}));
+      a.download = name;
+      a.click();
+    };
+
+    // PDF to Text
+    const pdfjsLibPromise = new Promise(res => {
+      const wait = () => window['pdfjsLib'] ? res(window['pdfjsLib']) : requestAnimationFrame(wait);
+      wait();
+    });
+    document.getElementById('parsePdfBtn').addEventListener('click', async () => {
+      const file = document.getElementById('pdfFile').files[0];
+      const out = document.getElementById('pdfOut');
+      out.textContent = '';
+      if (!file) { out.textContent = 'Pick a PDF first'; return; }
+      const pagesLimit = parseInt(document.getElementById('pdfPages').value || '10', 10);
+      const buf = await file.arrayBuffer();
+      const pdfjsLib = await pdfjsLibPromise;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.worker.min.js';
+      const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+      const max = Math.min(pdf.numPages, pagesLimit);
+      let full = '';
+      for (let p = 1; p <= max; p++) {
+        const page = await pdf.getPage(p);
+        const txtContent = await page.getTextContent();
+        const line = txtContent.items.map(i => i.str).join(' ');
+        full += line + '\n';
+      }
+      out.textContent = full.trim() || 'No text found';
+    });
+    document.getElementById('copyPdfTxt').addEventListener('click', () => {
+      copyToClipboard(document.getElementById('pdfOut').textContent.trim());
+    });
+    document.getElementById('downloadPdfTxt').addEventListener('click', () => {
+      downloadText('extracted.txt', document.getElementById('pdfOut').textContent.trim());
+    });
+
+    // Image to WebP
+    document.getElementById('convWebpBtn').addEventListener('click', async () => {
+      const file = document.getElementById('imgFile').files[0];
+      const q = parseFloat(document.getElementById('webpQ').value || '0.8');
+      const out = document.getElementById('webpOut');
+      out.innerHTML = '';
+      if (!file) { out.textContent = 'Pick an image first'; return; }
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        canvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a'); a.href = url; a.download = (file.name || 'image').replace(/\.\w+$/,'') + '.webp';
+          const preview = document.createElement('img'); preview.src = url; preview.alt = 'Converted preview'; preview.style.maxWidth = '100%';
+          const row = document.createElement('div'); row.className = 'row'; row.appendChild(a); a.textContent = 'Download WebP';
+          out.appendChild(preview); out.appendChild(row);
+        }, 'image/webp', q);
+      };
+      img.src = URL.createObjectURL(file);
+    });
+
+    // YouTube Thumbnail
+    const ytIdFromUrl = (u) => {
+      try {
+        const url = new URL(u);
+        if (url.hostname.includes('youtu.be')) return url.pathname.slice(1);
+        if (url.searchParams.get('v')) return url.searchParams.get('v');
+        const m = url.pathname.match(/\/shorts\/([^/]+)/); if (m) return m[1];
+      } catch { /* ignore */ }
+      // fallback direct ID guess
+      return u;
+    };
+    document.getElementById('ytBtn').addEventListener('click', () => {
+      const u = document.getElementById('ytUrl').value.trim();
+      const id = ytIdFromUrl(u);
+      const box = document.getElementById('ytOut');
+      box.innerHTML = '';
+      if (!id) { box.textContent = 'Give me a proper URL or ID'; return; }
+      const sizes = ['maxresdefault','sddefault','hqdefault','mqdefault'];
+      sizes.forEach(sz => {
+        const src = `https://img.youtube.com/vi/${id}/${sz}.jpg`;
+        const a = document.createElement('a'); a.href = src; a.target = '_blank'; a.rel = 'noopener';
+        const img = document.createElement('img'); img.src = src; img.alt = sz; img.style.maxWidth = '100%'; img.loading = 'lazy';
+        a.textContent = `Open ${sz}.jpg`; a.style.display = 'inline-block';
+        box.appendChild(img); const row = document.createElement('div'); row.className='row'; row.appendChild(a); box.appendChild(row);
+        const hr = document.createElement('div'); hr.className='sep'; box.appendChild(hr);
+      });
+    });
+
+    // QR Code
+    const qrBox = document.getElementById('qrBox');
+    let qrInst = null;
+    document.getElementById('qrBtn').addEventListener('click', () => {
+      const val = document.getElementById('qrText').value.trim();
+      if (!val) return;
+      qrBox.innerHTML = '';
+      const div = document.createElement('div');
+      qrBox.appendChild(div);
+      qrInst = new QRCode(div, { text: val, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
+    });
+    document.getElementById('qrSave').addEventListener('click', () => {
+      if (!qrInst) return alert('Generate a QR first');
+      const img = qrBox.querySelector('img') || qrBox.querySelector('canvas');
+      const link = document.createElement('a');
+      link.href = img.src || img.toDataURL('image/png');
+      link.download = 'qr.png';
+      link.click();
+    });
+
+    // Text utils
+    const txtArea = document.getElementById('txtArea');
+    document.querySelectorAll('#textutils .btn[data-act]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const act = btn.getAttribute('data-act');
+        const val = txtArea.value;
+        const out = document.getElementById('txtOut');
+        if (!val) { out.textContent = 'Type or paste some text'; return; }
+        if (act === 'upper') out.textContent = val.toUpperCase();
+        if (act === 'lower') out.textContent = val.toLowerCase();
+        if (act === 'title') out.textContent = val.replace(/\w\S*/g, s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase());
+        if (act === 'words') {
+          const words = val.trim().split(/\s+/).filter(Boolean).length;
+          out.textContent = `${words} words`;
+        }
+      });
+    });
+    document.getElementById('copyTxtUtil').addEventListener('click', () => {
+      const txt = document.getElementById('txtOut').textContent.trim();
+      if (!txt) return;
+      copyToClipboard(txt);
+    });
+
+    // JSON formatter
+    document.getElementById('fmtBtn').addEventListener('click', () => {
+      const raw = document.getElementById('jsonIn').value.trim();
+      const out = document.getElementById('jsonOut');
+      try { out.textContent = JSON.stringify(JSON.parse(raw), null, 2); }
+      catch(e) { out.textContent = 'Invalid JSON'; }
+    });
+    document.getElementById('minBtn').addEventListener('click', () => {
+      const raw = document.getElementById('jsonIn').value.trim();
+      const out = document.getElementById('jsonOut');
+      try { out.textContent = JSON.stringify(JSON.parse(raw)); }
+      catch(e) { out.textContent = 'Invalid JSON'; }
+    });
+    document.getElementById('copyJson').addEventListener('click', () => {
+      const txt = document.getElementById('jsonOut').textContent.trim();
+      if (!txt) return;
+      copyToClipboard(txt);
+    });
+
+    // UTM Builder
+    const enc = encodeURIComponent;
+    document.getElementById('utmBuild').addEventListener('click', () => {
+      const base = document.getElementById('utmBase').value.trim();
+      if (!base) { document.getElementById('utmOut').textContent = 'Enter a base URL'; return; }
+      const q = new URLSearchParams();
+      const s = document.getElementById('utmSource').value.trim(); if (s) q.set('utm_source', s);
+      const m = document.getElementById('utmMedium').value.trim(); if (m) q.set('utm_medium', m);
+      const c = document.getElementById('utmCampaign').value.trim(); if (c) q.set('utm_campaign', c);
+      const t = document.getElementById('utmTerm').value.trim(); if (t) q.set('utm_term', t);
+      const cc = document.getElementById('utmContent').value.trim(); if (cc) q.set('utm_content', cc);
+      let url = base;
+      url += (base.includes('?') ? '&' : '?') + q.toString();
+      document.getElementById('utmOut').textContent = url;
+    });
+    document.getElementById('utmCopy').addEventListener('click', () => copyToClipboard(document.getElementById('utmOut').textContent.trim()));
+
+    // URL encode decode
+    document.getElementById('encBtn').addEventListener('click', () => {
+      const t = document.getElementById('urlText').value;
+      document.getElementById('urlOut').textContent = encodeURIComponent(t);
+    });
+    document.getElementById('decBtn').addEventListener('click', () => {
+      const t = document.getElementById('urlText').value;
+      try { document.getElementById('urlOut').textContent = decodeURIComponent(t); }
+      catch { document.getElementById('urlOut').textContent = 'Cannot decode that input'; }
+    });
+    document.getElementById('copyUrl').addEventListener('click', () => copyToClipboard(document.getElementById('urlOut').textContent.trim()));
+  </script>
+
+  <!-- AdSense placeholder. Replace with your live code after approval.
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR-ADSENSE-CLIENT" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="YOUR-ADSENSE-CLIENT" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  -->
+</body>
+</html>

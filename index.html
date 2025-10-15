@@ -6,7 +6,169 @@
   <meta name="description" content="100% free YouTube transcript summarizer. Instantly get summaries of any YouTube video—even videos without transcripts. No signup, no payment, Chrome extension available.">
   <meta name="keywords" content="youtube transcript summarizer, youtube transcript summarizer free, summarize youtube video ai, youtube summarizer without transcript, youtube summarizer chrome extension">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="stylesheet" href="tool.css">
+  
+  <style>
+    /* 1. Base & Typography */
+    :root {
+      --brand-color: #f97316;
+      --brand-color-hover: #ea580c;
+      --text-primary: #212529;
+      --text-secondary: #495057;
+      --bg-light: #f8f9fa;
+      --bg-white: #ffffff;
+      --border-light: #dee2e6;
+      --border-lighter: #f1f3f5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      background-color: var(--bg-light);
+      color: var(--text-primary);
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+    }
+
+    /* 2. Layout & Container */
+    .container {
+      width: 100%;
+      max-width: 720px;
+      background-color: var(--bg-white);
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    /* 3. Elements Styling */
+    h1 {
+      font-size: clamp(1.75rem, 5vw, 2.25rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      border-bottom: 2px solid var(--border-lighter);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    p, li {
+      color: var(--text-secondary);
+    }
+    
+    a {
+      color: var(--brand-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: var(--brand-color-hover);
+    }
+    
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 0.6rem;
+    }
+
+    /* 4. Form & Interactive Elements */
+    #yturl {
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #yturl:focus {
+      outline: none;
+      border-color: var(--brand-color);
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+    }
+
+    .cta {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #fff;
+      background-color: var(--brand-color);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+    .cta:hover {
+      background-color: var(--brand-color-hover);
+    }
+    .cta:active {
+      transform: scale(0.99);
+    }
+    
+    /* 5. Result Box */
+    .result {
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      background-color: #fffaf0;
+      border-left: 4px solid var(--brand-color);
+      border-radius: 8px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    .result ul { margin-top: 0.5rem; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 6. Automatic Dark Mode */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-primary: #f8f9fa;
+        --text-secondary: #adb5bd;
+        --bg-light: #121212;
+        --bg-white: #1e1e1e;
+        --border-light: #495057;
+        --border-lighter: #343a40;
+      }
+      #yturl {
+        background-color: #2c2c2c;
+        color: var(--text-primary);
+      }
+      #yturl:focus {
+        box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
+      }
+      .result {
+        background-color: rgba(249, 115, 22, 0.1);
+      }
+      .container {
+        box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      }
+    }
+
+    /* 7. Mobile Responsiveness */
+    @media (max-width: 600px) {
+      body {
+        padding: 0;
+        background-color: var(--bg-white);
+      }
+      .container {
+        padding: 1.5rem 1.25rem;
+        border-radius: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -14,13 +176,11 @@
     <p>
       Instantly summarize any YouTube video—even if it has no transcript. <b>Paste a YouTube link below, get a clean AI summary for free, no signup or payment required.</b>
     </p>
-    <!-- TOOL -->
     <form id="summarizerForm" autocomplete="off">
       <input type="url" id="yturl" placeholder="Paste your YouTube link here..." required>
       <button type="submit" class="cta" style="margin-top:8px;">Summarize Video</button>
     </form>
     <div id="output" class="result" style="display:none;"></div>
-    <!-- FEATURES -->
     <section style="margin:30px 0;">
       <h2>Key Features</h2>
       <ul>
@@ -31,7 +191,6 @@
         <li>Mobile-friendly, privacy-first</li>
       </ul>
     </section>
-    <!-- FAQ -->
     <section style="margin:22px 0;">
       <h2>FAQs</h2>
       <ul>
@@ -42,7 +201,6 @@
         <li><b>Feedback or support?</b> Email: <a href="mailto:support@ytsummarizer.com">support@ytsummarizer.com</a></li>
       </ul>
     </section>
-    <!-- ABOUT & CONTACT -->
     <section style="margin-bottom:24px;">
       <h2>About & Contact</h2>
       <p>
@@ -50,11 +208,9 @@
         <br>Questions or partnership ideas? <a href="mailto:support@ytsummarizer.com">support@ytsummarizer.com</a>
       </p>
     </section>
-    <!-- SEO Keywords (for Google and trust) -->
     <div style="font-size:0.98rem;color:#567;">
       <b>Popular searches:</b> youtube transcript summarizer free, youtube summarizer chrome extension, summarize youtube video without transcript, youtube summarizer AI
     </div>
-    <!-- Footer -->
     <footer class="footer" style="border-top:1.5px solid #eee; margin-top:34px; padding-top:12px;">
       &copy; 2025 ytsummarizer.com · Made with ❤️ · No login or payment needed
     </footer>

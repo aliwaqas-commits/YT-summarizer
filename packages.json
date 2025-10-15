@@ -1,26 +1,5 @@
 {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "YouTube Transcript Summarizer",
-  "url": "https://ytsummarizer.com",
-  "description": "100% free AI tool to summarize any YouTube video—works even without a transcript. Chrome extension included.",
-  "creator": {
-    "@type": "Person",
-    "name": "Digital Marketing Expert",
-    "url": "https://www.linkedin.com/in/example"
-  },
-  "inLanguage": "en",
-  "copyrightHolder": {
-    "@type": "Organization",
-    "name": "ytsummarizer.com"
-  },
-  "keywords": [
-    "youtube transcript summarizer",
-    "youtube summarizer",
-    "youtube summarizer free",
-    "summarize youtube video ai",
-    "youtube summarizer without transcript",
-    "youtube summarizer chrome extension"
-  ],
-  "isAccessibleForFree": true
+  "version": 2,
+  "public": true,
+  "name": "youtube-transcript-summarizer"
 }

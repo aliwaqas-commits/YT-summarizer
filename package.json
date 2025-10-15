@@ -1,0 +1,6 @@
+{
+  "name": "youtube-summarizer", 
+  "version": "1.0.0",
+  "description": "AI YouTube Transcript Summarizer",
+  "main": "index.html"
+}

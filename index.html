@@ -1,752 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI YouTube Transcript Summarizer | Get Instant Video Summaries</title>
-    <meta name="description" content="Summarize any YouTube video in seconds with our AI-powered tool. Get accurate transcripts and concise summaries instantly.">
-    <style>
-        :root {
-            --primary: #4a6cf7;
-            --primary-dark: #3a5ce5;
-            --secondary: #6c757d;
-            --success: #28a745;
-            --danger: #dc3545;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f5f7ff;
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: white;
-            box-shadow: var(--box-shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .logo-icon {
-            font-size: 1.8rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border-radius: var(--border-radius);
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 80px 0;
-            text-align: center;
-            background: linear-gradient(135deg, #f5f7ff 0%, #e6ecff 100%);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-
-        /* Main Tool Section */
-        .tool-section {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 40px;
-            margin-bottom: 40px;
-        }
-
-        .tool-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .url-input {
-            flex: 1;
-            padding: 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-        }
-
-        .url-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .feature-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 25px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .feature-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-
-        /* Results Section */
-        .results-section {
-            display: none;
-            margin-top: 40px;
-        }
-
-        .results-tabs {
-            display: flex;
-            border-bottom: 1px solid var(--light-gray);
-            margin-bottom: 20px;
-        }
-
-        .tab {
-            padding: 12px 25px;
-            cursor: pointer;
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-        }
-
-        .tab.active {
-            border-bottom: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .summary-box, .transcript-box {
-            background-color: var(--light);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-            line-height: 1.6;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        /* Pricing Section */
-        .pricing-section {
-            padding: 80px 0;
-            background-color: white;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: var(--dark);
-        }
-
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .pricing-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .pricing-card.popular {
-            border: 2px solid var(--primary);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--primary);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .plan-name {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .plan-price {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .plan-price span {
-            font-size: 1rem;
-            color: var(--gray);
-        }
-
-        .plan-features {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .plan-features li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .plan-features li:last-child {
-            border-bottom: none;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #adb5bd;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #343a40;
-            color: #adb5bd;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .nav-links {
-                gap: 15px;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .input-group {
-                flex-direction: column;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-cards {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>⚡ Tube TL;DR — AI YouTube Transcript Summarizer</title>
+  <meta name="description" content="One‑click AI summaries for any YouTube video. TL;DR, chapters, Q&A, SEO pack, flashcards, PDF/Markdown export."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <link rel="stylesheet" href="styles.css"/>
+  <!-- jsPDF + html2canvas for PDF export -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <span class="logo-icon">📝</span>
-                    <span>AI YouTube Summarizer</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#features">Features</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="#blog">Blog</a>
-                </div>
-                <div class="auth-buttons">
-                    <button class="btn btn-outline">Log In</button>
-                    <button class="btn btn-primary">Sign Up Free</button>
-                </div>
-            </nav>
-        </div>
-    </header>
+<header class="topbar">
+  <div class="brand">⚡ Tube TL;DR</div>
+  <nav>
+    <button id="btn-history" class="link">History</button>
+    <button id="btn-theme" class="link" title="Toggle theme">🌓</button>
+  </nav>
+</header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Summarize Any YouTube Video in Seconds</h1>
-            <p>Get accurate AI-powered summaries and transcripts for any YouTube video. Save time and extract key insights instantly.</p>
-            
-            <div class="tool-section">
-                <h2 class="tool-title">Paste YouTube URL to Get Started</h2>
-                <div class="input-group">
-                    <input type="text" class="url-input" id="youtube-url" placeholder="Paste YouTube URL here (e.g., https://www.youtube.com/watch?v=...)" />
-                    <button class="btn btn-primary" id="summarize-btn">Summarize</button>
-                </div>
-                
-                <div class="features-grid" id="features">
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h3 class="feature-title">Instant Summaries</h3>
-                        <p>Get concise summaries in seconds with our advanced AI technology.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📄</div>
-                        <h3 class="feature-title">Full Transcripts</h3>
-                        <p>Access complete transcripts with timestamps for easy reference.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🔒</div>
-                        <h3 class="feature-title">Privacy Focused</h3>
-                        <p>Your data is secure. We don't store your video history without permission.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">💾</div>
-                        <h3 class="feature-title">Export Options</h3>
-                        <p>Download summaries and transcripts as PDF, TXT, or DOC files.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<main class="container">
+  <section class="hero">
+    <h1>AI YouTube Transcript Summarizer</h1>
+    <p class="sub">Paste a YouTube link. Get a dead‑simple summary, chapters, Q&amp;A, SEO pack, and export.</p>
 
-    <!-- Results Section -->
-    <section class="container">
-        <div class="results-section" id="results">
-            <h2 class="tool-title">Your Summary & Transcript</h2>
-            
-            <div class="results-tabs">
-                <div class="tab active" data-tab="summary">Summary</div>
-                <div class="tab" data-tab="transcript">Full Transcript</div>
-                <div class="tab" data-tab="key-points">Key Points</div>
-            </div>
-            
-            <div class="tab-content active" id="summary-content">
-                <div class="summary-box" id="summary-text">
-                    <!-- Summary will be displayed here -->
-                </div>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" id="copy-summary">Copy Summary</button>
-                    <button class="btn btn-outline" id="download-pdf">Download as PDF</button>
-                    <button class="btn btn-outline" id="share-summary">Share Summary</button>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="transcript-content">
-                <div class="transcript-box" id="transcript-text">
-                    <!-- Transcript will be displayed here -->
-                </div>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" id="copy-transcript">Copy Transcript</button>
-                    <button class="btn btn-outline" id="download-txt">Download as TXT</button>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="key-points-content">
-                <div class="summary-box" id="key-points-text">
-                    <!-- Key points will be displayed here -->
-                </div>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" id="copy-key-points">Copy Key Points</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <form id="url-form" class="url-form">
+      <input id="yt-url" type="url" placeholder="https://www.youtube.com/watch?v=..." required />
+      <select id="lang">
+        <option value="auto" selected>Auto language</option>
+        <option value="en">English</option><option value="es">Spanish</option>
+        <option value="de">German</option><option value="fr">French</option>
+        <option value="pt">Portuguese</option><option value="hi">Hindi</option>
+        <option value="ja">Japanese</option><option value="ko">Korean</option>
+      </select>
+      <select id="audience">
+        <option value="general" selected>General</option>
+        <option value="student">Student</option>
+        <option value="executive">Executive</option>
+        <option value="educator">Educator</option>
+      </select>
+      <select id="length">
+        <option value="short">Short</option>
+        <option value="medium" selected>Medium</option>
+        <option value="long">Long</option>
+      </select>
+      <button id="go" class="primary" type="submit">Summarize</button>
+    </form>
 
-    <!-- Pricing Section -->
-    <section class="pricing-section" id="pricing">
-        <div class="container">
-            <h2 class="section-title">Simple, Transparent Pricing</h2>
-            <div class="pricing-cards">
-                <div class="pricing-card">
-                    <h3 class="plan-name">Free</h3>
-                    <div class="plan-price">$0<span>/month</span></div>
-                    <ul class="plan-features">
-                        <li>5 summaries per month</li>
-                        <li>Up to 10-minute videos</li>
-                        <li>Basic summaries</li>
-                        <li>Text-only export</li>
-                        <li>Standard processing speed</li>
-                    </ul>
-                    <button class="btn btn-outline">Get Started</button>
-                </div>
-                
-                <div class="pricing-card popular">
-                    <div class="popular-badge">MOST POPULAR</div>
-                    <h3 class="plan-name">Pro</h3>
-                    <div class="plan-price">$9<span>/month</span></div>
-                    <ul class="plan-features">
-                        <li>100 summaries per month</li>
-                        <li>Up to 2-hour videos</li>
-                        <li>Advanced AI summaries</li>
-                        <li>PDF & DOC export</li>
-                        <li>Faster processing</li>
-                        <li>Save summaries to history</li>
-                    </ul>
-                    <button class="btn btn-primary">Start Free Trial</button>
-                </div>
-                
-                <div class="pricing-card">
-                    <h3 class="plan-name">Business</h3>
-                    <div class="plan-price">$29<span>/month</span></div>
-                    <ul class="plan-features">
-                        <li>Unlimited summaries</li>
-                        <li>Any length videos</li>
-                        <li>Premium AI summaries</li>
-                        <li>All export formats</li>
-                        <li>Priority processing</li>
-                        <li>Team collaboration</li>
-                        <li>API access</li>
-                    </ul>
-                    <button class="btn btn-outline">Contact Sales</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div id="freemium" class="freemium"></div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>AI YouTube Summarizer</h3>
-                    <p>Summarize any YouTube video in seconds with our AI-powered tool.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Product</h3>
-                    <ul class="footer-links">
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#api">API</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Company</h3>
-                    <ul class="footer-links">
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#careers">Careers</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#privacy">Privacy Policy</a></li>
-                        <li><a href="#terms">Terms of Service</a></li>
-                        <li><a href="#cookies">Cookie Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 AI YouTube Summarizer. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+  <section id="status" class="status hidden"></section>
 
-    <script>
-        // DOM Elements
-        const summarizeBtn = document.getElementById('summarize-btn');
-        const youtubeUrlInput = document.getElementById('youtube-url');
-        const resultsSection = document.getElementById('results');
-        const summaryText = document.getElementById('summary-text');
-        const transcriptText = document.getElementById('transcript-text');
-        const keyPointsText = document.getElementById('key-points-text');
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        // Event Listeners
-        summarizeBtn.addEventListener('click', generateSummary);
-        
-        // Tab switching
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabId = tab.getAttribute('data-tab');
-                
-                // Update active tab
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                // Show active content
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === `${tabId}-content`) {
-                        content.classList.add('active');
-                    }
-                });
-            });
-        });
-        
-        // Generate Summary Function
-        function generateSummary() {
-            const youtubeUrl = youtubeUrlInput.value.trim();
-            
-            // Basic URL validation
-            if (!youtubeUrl) {
-                alert('Please enter a YouTube URL');
-                return;
-            }
-            
-            if (!youtubeUrl.includes('youtube.com') && !youtubeUrl.includes('youtu.be')) {
-                alert('Please enter a valid YouTube URL');
-                return;
-            }
-            
-            // Show loading state
-            summarizeBtn.innerHTML = 'Summarizing...';
-            summarizeBtn.disabled = true;
-            
-            // In a real implementation, this would call an API
-            // For this demo, we'll simulate the API call with a timeout
-            setTimeout(() => {
-                // Show results section
-                resultsSection.style.display = 'block';
-                
-                // Sample data for demonstration
-                const sampleSummary = `This video discusses the importance of artificial intelligence in modern technology. The speaker explains how AI is transforming various industries, from healthcare to finance. Key takeaways include the growing demand for AI skills in the job market and the ethical considerations that come with AI development. The video concludes with predictions about AI's future impact on society and recommendations for those looking to enter the field.`;
-                
-                const sampleTranscript = `[0:00] Introduction to artificial intelligence and its growing importance.
-[0:45] How AI is being used in healthcare for diagnostics and treatment planning.
-[2:30] Applications of AI in the financial sector for fraud detection and algorithmic trading.
-[4:15] The impact of AI on the job market and the skills needed for future employment.
-[6:20] Ethical considerations in AI development and deployment.
-[8:10] Future predictions for AI technology and its societal impact.
-[9:45] Recommendations for individuals interested in learning about AI.
-[10:30] Conclusion and final thoughts.`;
-                
-                const sampleKeyPoints = `• AI is transforming multiple industries including healthcare and finance
-• There is growing demand for AI skills in the job market
-• Ethical considerations are crucial in AI development
-• AI's future impact on society will be significant
-• Learning AI skills can provide career opportunities`;
-                
-                // Populate the content
-                summaryText.textContent = sampleSummary;
-                transcriptText.textContent = sampleTranscript;
-                keyPointsText.textContent = sampleKeyPoints;
-                
-                // Reset button
-                summarizeBtn.innerHTML = 'Summarize';
-                summarizeBtn.disabled = false;
-                
-                // Scroll to results
-                resultsSection.scrollIntoView({ behavior: 'smooth' });
-            }, 2000);
-        }
-        
-        // Copy functionality
-        document.getElementById('copy-summary').addEventListener('click', () => {
-            copyToClipboard(summaryText.textContent);
-            alert('Summary copied to clipboard!');
-        });
-        
-        document.getElementById('copy-transcript').addEventListener('click', () => {
-            copyToClipboard(transcriptText.textContent);
-            alert('Transcript copied to clipboard!');
-        });
-        
-        document.getElementById('copy-key-points').addEventListener('click', () => {
-            copyToClipboard(keyPointsText.textContent);
-            alert('Key points copied to clipboard!');
-        });
-        
-        // Download functionality (simulated)
-        document.getElementById('download-pdf').addEventListener('click', () => {
-            alert('In a real implementation, this would download a PDF file');
-        });
-        
-        document.getElementById('download-txt').addEventListener('click', () => {
-            alert('In a real implementation, this would download a TXT file');
-        });
-        
-        // Share functionality
-        document.getElementById('share-summary').addEventListener('click', () => {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'YouTube Video Summary',
-                    text: summaryText.textContent.substring(0, 100) + '...',
-                    url: window.location.href
-                });
-            } else {
-                alert('Share feature not supported in your browser. Copy the summary instead.');
-            }
-        });
-        
-        // Utility function to copy text to clipboard
-        function copyToClipboard(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-        }
-    </script>
+  <section id="results" class="results hidden">
+    <div class="actions">
+      <button id="btn-export-pdf" class="primary">Export PDF</button>
+      <button id="btn-copy-md" class="ghost">Copy Markdown</button>
+    </div>
+
+    <div id="summary-card" class="card"></div>
+
+    <div class="grid">
+      <div class="card"><h3>Smart Chapters</h3><div id="chapters"></div></div>
+      <div class="card"><h3>Key Quotes &amp; Keywords</h3><div id="keyquotes"></div></div>
+      <div class="card"><h3>SEO Pack</h3><div id="seo"></div></div>
+      <div class="card"><h3>Social Snippets</h3><div id="social"></div></div>
+      <div class="card"><h3>Study Mode</h3><div id="study"></div></div>
+    </div>
+
+    <div class="card">
+      <h3>Ask Anything about this video</h3>
+      <form id="ask-form" class="ask">
+        <input id="ask-input" type="text" placeholder="e.g. What are the 3 key takeaways?" />
+        <button class="primary" type="submit">Ask</button>
+      </form>
+      <div id="answers"></div>
+    </div>
+  </section>
+
+  <section id="history" class="history hidden">
+    <h2>History</h2>
+    <div id="history-list"></div>
+  </section>
+</main>
+
+<template id="spinner"><div class="spinner"><div></div><div></div><div></div></div></template>
+<script src="app.js" defer></script>
 </body>
 </html>

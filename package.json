@@ -1,6 +1,11 @@
 {
-  "name": "youtube-summarizer", 
+  "name": "tube-tldr-vercel",
   "version": "1.0.0",
-  "description": "AI YouTube Transcript Summarizer",
-  "main": "index.html"
+  "private": true,
+  "type": "module",
+  "engines": { "node": "20.x" },
+  "dependencies": {
+    "openai": "^4.63.0",
+    "youtube-transcript": "^1.2.1"
+  }
 }

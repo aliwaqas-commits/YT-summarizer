@@ -1,9 +1,26 @@
-  "name": "tooldeck",
-  "version": "1.0.0",
-  "private": true,
-  "description": "One page free toolkit. Ad supported. No build step.",
-  "scripts": {
-    "start": "npx serve -s -l 5173 .",
-    "dev": "npx http-server -p 5173 ."
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "YouTube Transcript Summarizer",
+  "url": "https://ytsummarizer.com",
+  "description": "100% free AI tool to summarize any YouTube video—works even without a transcript. Chrome extension included.",
+  "creator": {
+    "@type": "Person",
+    "name": "Digital Marketing Expert",
+    "url": "https://www.linkedin.com/in/example"
+  },
+  "inLanguage": "en",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "name": "ytsummarizer.com"
+  },
+  "keywords": [
+    "youtube transcript summarizer",
+    "youtube summarizer",
+    "youtube summarizer free",
+    "summarize youtube video ai",
+    "youtube summarizer without transcript",
+    "youtube summarizer chrome extension"
+  ],
+  "isAccessibleForFree": true
 }
